@@ -1,0 +1,6 @@
+[run]
+branch = True
+source = test_helper_gae3/
+
+[html]
+directory = htmlcov

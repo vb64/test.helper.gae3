@@ -1,2 +1,1 @@
-# test.helper.gae3
-Class for autotests GoogleAppEngine python3 apps
+# Class for autotests GoogleAppEngine python3 app.
