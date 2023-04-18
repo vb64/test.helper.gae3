@@ -21,6 +21,7 @@ class TestGae3:
     def tear_down(self):
         """Deactivate GAE testbed."""
         self.gae_testbed.deactivate()
+        self.gae_testbed = None
 
     def check_db_tables(self, db_state):
         """Check record count in the given GAE ndb Model.
