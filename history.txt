@@ -1,4 +1,4 @@
-??.>>.2023 ver.1.0
+18.04.2023 ver.1.0
 ------------------
 
 + Class for autotests GoogleAppEngine python3 app.
