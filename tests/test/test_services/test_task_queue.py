@@ -3,6 +3,7 @@
 make test T=test_services/test_task_queue.py
 """
 import pytest
+from flask import Flask
 from google.appengine.api.taskqueue import Queue, Task
 from . import TestServices
 
@@ -42,3 +43,33 @@ class TestTaskQueue(TestServices):
         """Dump queue content."""
         self.tester.gae_queue_dump()
         self.tester.gae_queue_dump(fields=['name', 'url'])
+
+    def test_flask_execute(self):
+        """Execute queue in fask app context."""
+        app = Flask(__name__)
+        app.config['TESTING'] = True
+
+        @app.route('/', methods=['POST'])
+        def root_page():
+            """Flask view."""
+            return 'OK'
+
+        client = app.test_client()
+
+        data = self.tester.gae_tasks_dict()
+        assert len(data) == 1
+        task = data[list(data.keys())[0]]
+
+        self.tester.gae_task_flask_execute(task, client, is_delete=False, is_debug_print=True)
+        data = self.tester.gae_tasks_dict()
+        assert len(data) == 1
+
+        self.tester.gae_task_flask_execute(task, client, is_debug_print=True)
+        data = self.tester.gae_tasks_dict()
+        assert not data
+
+        self.queue.add(Task('xxx', url='/'))
+
+        self.tester.gae_queue_flask_execute(client)
+        data = self.tester.gae_tasks_dict()
+        assert not data

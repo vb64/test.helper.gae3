@@ -88,3 +88,34 @@ class TestGae3:
     def gae_tasks_dict(self, queue_name='default'):
         """Return all tasks for given GAE taskqueue as dict."""
         return {task['name']: task for task in self.gae_tasks(queue_name=queue_name, flush_queue=False)}
+
+    def gae_task_flask_execute(
+      self, task, flask_app_test_client, is_delete=True, is_debug_print=False, status_code=200
+    ):  # pylint: disable=too-many-arguments
+        """Execute given task in fask app context."""
+        method = task['method']
+        assert method in ['PUT', 'PULL', 'POST']
+
+        if is_debug_print:
+            print("#task->", task['method'], task['url'], task['body'])
+
+        # response = flask_app_test_client.get(task['url'])
+        response = flask_app_test_client.post(task['url'], data=task['body'])
+
+        if is_delete:
+            self.taskqueue_stub.DeleteTask(task['queue_name'], task['name'])
+
+        assert response.status_code == status_code
+
+    def gae_queue_flask_execute(
+      self, flask_test_client, queue_name='default', is_debug_print=False, status_code=200
+    ):
+        """Run all tasks for GAE taskqueue in fask app context."""
+        for task in self.gae_tasks(queue_name=queue_name, flush_queue=True):
+            self.gae_task_flask_execute(
+              task,
+              flask_test_client,
+              is_delete=False,
+              is_debug_print=is_debug_print,
+              status_code=status_code
+            )
