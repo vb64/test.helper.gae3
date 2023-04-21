@@ -33,3 +33,11 @@ class TestDatastore(TestServices):
               (ModelTest, 2),
             ])
         assert 'must be 2' in str(err.value)
+
+    def test_reread(self):
+        """Bypass memcash read."""
+        item = ModelTest()
+        item.put()
+
+        item1 = self.tester.reread(item.key)
+        assert item.key == item1.key
