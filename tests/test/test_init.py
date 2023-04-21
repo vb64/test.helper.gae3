@@ -15,7 +15,7 @@ class TestInitTestbed(TestCase):
         tester = TestGae3()
         assert tester.gae_testbed is None
 
-        tester.set_up(self.proj_dir)
+        tester.set_up()
         assert tester.gae_testbed is not None
 
         tester.tear_down()

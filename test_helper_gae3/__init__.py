@@ -12,7 +12,7 @@ class TestGae3:
     blobstore_stub = None
     taskqueue_stub = None
 
-    def set_up(self, project_dir):
+    def set_up(self):
         """Activate GAE testbed for project in given dir."""
         self.gae_testbed = testbed.Testbed()
         self.gae_testbed.activate()
@@ -26,7 +26,7 @@ class TestGae3:
         self.gae_testbed.init_images_stub()
         self.gae_testbed.init_mail_stub()
 
-        self.gae_testbed.init_taskqueue_stub(root_path=project_dir)
+        self.gae_testbed.init_taskqueue_stub()
         self.taskqueue_stub = self.gae_testbed.get_stub(testbed.TASKQUEUE_SERVICE_NAME)
 
         self.gae_testbed.init_urlfetch_stub()
