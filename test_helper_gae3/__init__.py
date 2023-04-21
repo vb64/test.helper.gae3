@@ -17,6 +17,12 @@ class TestGae3:
         # self.gae_testbed.setup_env()
         self.gae_testbed.init_datastore_v3_stub()
         self.gae_testbed.init_memcache_stub()
+        self.gae_testbed.init_blobstore_stub()
+        self.gae_testbed.init_images_stub()
+        self.gae_testbed.init_mail_stub()
+        self.gae_testbed.init_taskqueue_stub()
+        self.gae_testbed.init_urlfetch_stub()
+        self.gae_testbed.init_user_stub()
 
     def tear_down(self):
         """Deactivate GAE testbed."""
@@ -39,3 +45,7 @@ class TestGae3:
               i,
               count
             )
+
+    def reread(self, ndbkey):
+        """Drop GAE memcash and read db record."""
+        return ndbkey.get(use_cache=False, use_memcache=False)
