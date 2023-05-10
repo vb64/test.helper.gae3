@@ -12,8 +12,16 @@ class TestGae3:
     blobstore_stub = None
     taskqueue_stub = None
 
-    def set_up(self):
-        """Activate GAE testbed for project in given dir."""
+    def set_up(self, root_path, queue_config_path=None):
+        """Activate GAE testbed for project in root_path dir.
+
+        For using queues names other then 'default', root_path dir must contain file 'queue.yaml' (or 'queue.yml')
+        with correct queues definition.
+
+        If root_path set to None, only 'default' queue is available.
+
+        Argument `queue_config_path` can contain the full path to queue.yaml; supersedes root_path.
+        """
         self.gae_testbed = testbed.Testbed()
         self.gae_testbed.activate()
         # self.gae_testbed.setup_env()
@@ -26,7 +34,10 @@ class TestGae3:
         self.gae_testbed.init_images_stub()
         self.gae_testbed.init_mail_stub()
 
-        self.gae_testbed.init_taskqueue_stub()
+        self.gae_testbed.init_taskqueue_stub(
+          root_path=root_path,
+          queue_config_path=queue_config_path
+        )
         self.taskqueue_stub = self.gae_testbed.get_stub(testbed.TASKQUEUE_SERVICE_NAME)
 
         self.gae_testbed.init_urlfetch_stub()
