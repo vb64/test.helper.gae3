@@ -1,7 +1,7 @@
 # Class for autotests GoogleAppEngine Python3 app.
 
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/vb64/test.helper.gae3/pep257.yml?label=Pep257&style=plastic&branch=main)](https://github.com/vb64/test.helper.gae3/actions?query=workflow%3Apep257)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/vb64/test.helper.gae3/py3.yml?label=Python%203.7-3.10&style=plastic&branch=main)](https://github.com/vb64/test.helper.gae3/actions?query=workflow%3Apy3)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/vb64/test.helper.gae3/py3.yml?label=Python%203.7-3.11&style=plastic&branch=main)](https://github.com/vb64/test.helper.gae3/actions?query=workflow%3Apy3)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/abee606aca3047f9952c43196aa5d2b7)](https://app.codacy.com/gh/vb64/test.helper.gae3/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/abee606aca3047f9952c43196aa5d2b7)](https://app.codacy.com/gh/vb64/test.helper.gae3/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
 
