@@ -26,7 +26,11 @@ class TestCase(unittest.TestCase, TestGae3):
 
     def setUp(self):
         super().setUp()
-        TestGae3.set_up(self)  # activate GAE testbed
+
+        # For using queues names other then 'default', root_path dir must contain file
+        # 'queue.yaml' (or 'queue.yml') with correct queues definition.
+        # If root_path set to None, only 'default' queue is available.
+        TestGae3.set_up(self, 'path/to/folder/with/queue.yaml')  # activate GAE testbed
 
     def tearDown(self):
         TestGae3.tear_down(self)  # deactivate GAE testbed
